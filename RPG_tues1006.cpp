@@ -9,18 +9,11 @@
 
 int main()
 {
-    GameManager::GetI().Init();
+    GameManager::GetI();
     while (GameManager::GetI().run)
     {
         GameManager::GetI().Update();
-        if (_kbhit())
-        {
-            char c = _getch();
-            if (c == 'q')
-            {
-                GameManager::GetI().LoopExit();
-            }
-        }
+        
     }
 }
 

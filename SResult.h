@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <conio.h>
 
 #include "GameManager.h"
 #include "GameBase.h"

@@ -8,9 +8,25 @@ void SResult::Init(GameManager* manager)
 }
 void SResult::Update(GameManager* manager)
 {
-	char c = std::cin.get();
-	std::cout << c << std::endl;
-	manager->ChangeCS(manager->GetS(manager->STITLE));
+	std::cout << "Enter : Go to Title\nq     : Close Game" << std::endl;
+	while (true)
+	{
+		if (_kbhit())
+		{
+			char c = _getch();
+			if (c == 'q')
+			{
+				GameManager::GetI().LoopExit();
+				break;
+			}
+			if (c == '\r')
+			{
+				manager->ChangeCS(manager->GetS(manager->STITLE));
+				break;
+			}
+		}
+	}
+	
 }
 void SResult::Exit(GameManager* manager)
 {

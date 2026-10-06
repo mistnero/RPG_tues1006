@@ -8,8 +8,16 @@ void SGame::Init(GameManager* manager)
 }
 void SGame::Update(GameManager* manager)
 {
-	char c = std::cin.get();
-	std::cout << c << std::endl;
+	while (true)
+	{
+		if(_kbhit())
+		{
+			if (_getch() == '\r')
+			{
+				break;
+			}
+		}
+	}
 	manager->ChangeCS(manager->GetS(manager->SRESULT));
 }
 void SGame::Exit(GameManager* manager)

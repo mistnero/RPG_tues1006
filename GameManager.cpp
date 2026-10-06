@@ -1,5 +1,10 @@
 #include "GameManager.h"
 
+GameManager::GameManager()
+	:run(true), current_s(std::move(std::make_unique<STitle>()))
+{
+	current_s->Init(this);
+}
 GameManager& GameManager::GetI()
 {
 	static GameManager instance;

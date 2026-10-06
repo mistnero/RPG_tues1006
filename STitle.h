@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <conio.h>
 
 #include "GameManager.h"
 #include "GameBase.h"
@@ -13,7 +14,6 @@ class STitle :public GameBase
 public:
 	STitle()
 	{
-		std::cout << "test" << std::endl;
 	}
 	void Init(GameManager* manager);
 	void Update(GameManager* manager);

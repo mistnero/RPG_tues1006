@@ -8,8 +8,17 @@ void STitle::Init(GameManager* manager)
 }
 void STitle::Update(GameManager* manager)
 {
-	char c = std::cin.get();
-	std::cout << c << std::endl;
+	std::cout << "Press Enter key" << std::endl;
+	while (true)
+	{
+		if (_kbhit())
+		{
+			if (_getch() == '\r')
+			{
+				break;
+			}
+		}
+	}
 	manager->ChangeCS(manager->GetS(manager->SGAME));
 }
 void STitle::Exit(GameManager* manager)
