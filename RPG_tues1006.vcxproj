@@ -137,6 +137,7 @@
     <ClInclude Include="EnemyF.h" />
     <ClInclude Include="GameBase.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameRandom.h" />
     <ClInclude Include="SGame.h" />
     <ClInclude Include="SResult.h" />
     <ClInclude Include="STitle.h" />

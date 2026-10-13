@@ -8,15 +8,10 @@
 
 class EnemyF
 {
-	EnemyF();
 public:
 	static const EnemyData data[];
 	static const int dsize;
-	
-	EnemyF(const EnemyF&) = delete;
-	EnemyF& operator=(const EnemyF&) = delete;
 
-	EnemyF& GetI();
-
+	EnemyF();
 	static std::unique_ptr<Enemy> CreateE(int ID);
 };

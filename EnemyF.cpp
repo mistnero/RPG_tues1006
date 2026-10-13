@@ -17,11 +17,6 @@ EnemyF::EnemyF()
 
 }
 
-EnemyF& EnemyF::GetI()
-{
-	static EnemyF instance;
-	return instance;
-}
 
 std::unique_ptr<Enemy> EnemyF::CreateE(int ID)
 {

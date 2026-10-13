@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "CharaData.h"
+#include "GameRandom.h"
 
 class Enemy
 {
@@ -17,5 +18,7 @@ public:
 	Enemy(const EnemyData& sdata);
 	
 	int Attack();
+
+	int Damage(int fatk);
 	
 };
