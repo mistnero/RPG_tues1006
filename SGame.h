@@ -4,6 +4,9 @@
 
 #include "GameManager.h"
 #include "GameBase.h"
+#include "PlayerF.h"
+#include "EnemyF.h"
+#include "GameRandom.h"
 
 class GameManager;
 

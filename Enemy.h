@@ -19,6 +19,9 @@ public:
 	
 	int Attack();
 
-	int Damage(int fatk);
-	
+	int Damage(int patk,int pspd);
+
+	int LookSPD();
+	int LookHP();
+	std::string LookName();
 };

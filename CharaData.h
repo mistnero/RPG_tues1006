@@ -18,13 +18,14 @@ struct EnemyData
 //職業補正値データ
 struct PlayerJobData
 {
+	int id;
 	std::string job;
-	int hp;
-	int atk;
-	int def;
-	int spd;
-	int exp;
-	int gold;
+	float hp;
+	float atk;
+	float def;
+	float spd;
+	float exp;
+	float gold;
 };
 //プレイヤーデータ
 struct PlayerData
