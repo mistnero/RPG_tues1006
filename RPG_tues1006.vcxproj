@@ -126,6 +126,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyF.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameTurn.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerF.cpp" />
     <ClCompile Include="RPG_tues1006.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="GameBase.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameRandom.h" />
+    <ClInclude Include="GameTurn.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerF.h" />
     <ClInclude Include="SGame.h" />
