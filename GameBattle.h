@@ -6,13 +6,15 @@
 #include "EnemyF.h"
 #include "GameRandom.h"
 
+#define ENE_MAX 3
+
 //í“¬‚Ìˆ—
 class GameBattle
 {
 	//ƒvƒŒƒCƒ„[
 	std::unique_ptr<Player> pl;
 	//“G
-	std::unique_ptr<Enemy> ene[3];
+	std::unique_ptr<Enemy> ene[ENE_MAX];
 	//“G‚Ì”
 	int ene_n;
 
