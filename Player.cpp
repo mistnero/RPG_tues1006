@@ -105,3 +105,7 @@ std::string Player::LookName()
 {
 	return data.name;
 }
+int Player::LookLevel()
+{
+	return data.level;
+}

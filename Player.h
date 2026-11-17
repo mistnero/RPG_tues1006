@@ -22,4 +22,5 @@ public:
 	int LookSPD();
 	int LookHP();
 	std::string LookName();
+	int LookLevel();
 };

@@ -24,7 +24,7 @@ std::unique_ptr<Enemy> EnemyF::CreateE(int ID)
 	{
 		if (data[e].id == ID)
 		{
-			return std::make_unique<Enemy>(data[1]);
+			return std::make_unique<Enemy>(data[e]);
 		}
 	}
 	return nullptr;

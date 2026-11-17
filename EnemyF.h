@@ -8,10 +8,10 @@
 
 class EnemyF
 {
-public:
+
 	static const EnemyData data[];
 	static const int dsize;
-
+public:
 	EnemyF();
 	static std::unique_ptr<Enemy> CreateE(int ID);
 };
