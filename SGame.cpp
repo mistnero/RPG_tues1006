@@ -15,22 +15,41 @@ void SGame::Update(GameManager* manager)
 	int id = GameRandom::GetI().GetR(1, 3);
 	std::unique_ptr<Enemy> ene = EnemyF::CreateE(id);
 	int bt = 0;
+	bool test_turn = true;
 	int php = pl->LookHP();
 	int nhp = ene->LookHP();
 
 	while (true)
 	{
-		if (pl->LookSPD() > ene->LookSPD())
+		if(test_turn)
 		{
-			bt = 1;
+			if (pl->LookSPD() > ene->LookSPD())
+			{
+				bt = 1;
+				test_turn = false;
+			}
+			else if (ene->LookSPD() > pl->LookSPD())
+			{
+				bt = 2;
+				test_turn = false;
+			}
+			else
+			{
+				bt = GameRandom::GetI().GetR(1, 2);
+				test_turn = false;
+			}
 		}
-		else if (ene->LookSPD() > pl->LookSPD())
-		{
-			bt = 2;
-		}
-		else
-		{
-			bt = GameRandom::GetI().GetR(1, 2);
+		else {
+			if(bt==1)
+			{
+				bt = 2;
+				test_turn = true;
+			}
+			else
+			{
+				bt = 1;
+				test_turn = true;
+			}
 		}
 
 		//p
@@ -48,7 +67,8 @@ void SGame::Update(GameManager* manager)
 					}
 				}
 			}
-			nhp = ene->Damage(atk, pl->LookSPD());
+		//	nhp = ene->Damage(atk, pl->LookSPD());
+			nhp = ene->Damage2(atk);
 		}
 		//n
 		else if (bt == 2)
@@ -65,7 +85,8 @@ void SGame::Update(GameManager* manager)
 					}
 				}
 			}
-			php = pl->Damage(atk, ene->LookSPD());
+		//	php = pl->Damage(atk, ene->LookSPD());
+			php = pl->Damage2(atk);
 		}
 
 		while(true)

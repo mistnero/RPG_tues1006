@@ -2,7 +2,7 @@
 
 const PlayerData PlayerF::pdata =
 {
-	1,"NAME","村人",8,3,2,3,0,50,1
+	1,"NAME","村人",80,30,20,30,0,50,1
 };
 
 const PlayerJobData PlayerF::jdata[] =
@@ -35,17 +35,21 @@ std::unique_ptr<Player> PlayerF::CreateP(const std::string& NAME, int jID)
 }
 
 /*
-	j
+	//職業補正値データ
+struct PlayerJobData
+{
 	int id;
 	std::string job;
-	int hp;
-	int atk;
-	int def;
-	int spd;
-	int exp;
-	int gold;
-
-	p
+	float hp;
+	float atk;
+	float def;
+	float spd;
+	float exp;
+	float gold;
+};
+//プレイヤーデータ
+struct PlayerData
+{
 	int p;
 	std::string name;
 	std::string job;
@@ -56,4 +60,5 @@ std::unique_ptr<Player> PlayerF::CreateP(const std::string& NAME, int jID)
 	int exp;
 	int gold;
 	int level;
+};
 */

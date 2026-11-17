@@ -63,6 +63,35 @@ int Enemy::Damage(int patk, int pspd)
 	return data.hp;
 }
 
+int Enemy::Damage2(int patk)
+{
+	if (patk < 0)
+	{
+		std::cout << "０ダメージ！" << std::endl;
+		return data.hp;
+	}
+	if (data.hp - (patk - data.def) < 0)
+	{
+		std::cout << data.name << "に" << data.hp << "のダメージ！" << std::endl;
+		data.hp = 0;
+		return 0;
+	}
+	if (patk-data.def > 100)
+	{
+		data.hp -= 100;
+		std::cout << data.name << "に" << 100 << "のダメージ！" << std::endl;
+		if (data.hp < 0)
+		{
+			data.hp = 0;
+		}
+		return data.hp;
+	}
+	
+	data.hp -= patk - data.def;
+	std::cout << data.name << "に" << patk - data.def << "のダメージ！" << std::endl;
+	return data.hp;
+}
+
 int Enemy::LookSPD()
 {
 	return data.spd;

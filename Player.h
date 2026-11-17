@@ -17,6 +17,7 @@ public:
 	int Attack();
 
 	int Damage(int eatk,int espd);
+	int Damage2(int eatk);
 
 	int LookSPD();
 	int LookHP();

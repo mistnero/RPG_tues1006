@@ -20,6 +20,7 @@ public:
 	int Attack();
 
 	int Damage(int patk,int pspd);
+	int Damage2(int patk);
 
 	int LookSPD();
 	int LookHP();
