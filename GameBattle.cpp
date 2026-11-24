@@ -196,3 +196,5 @@ bool GameBattle::OneBattle(int whoturn, int whotarget, int atk_num, bool atk_or_
 
 	return false;
 }
+
+//ƒeƒXƒg
