@@ -79,6 +79,8 @@ bool GameBattle::OneBattle(int whoturn, int whotarget, int atk_num, bool atk_or_
 			}
 			//ダメージをリセット
 			last_damage = 0;
+			//ダメージ時に１ターン経過
+			turn_num++;
 			return true;
 		}
 		break;
@@ -114,6 +116,8 @@ bool GameBattle::OneBattle(int whoturn, int whotarget, int atk_num, bool atk_or_
 			}
 			//ダメージをリセット
 			last_damage = 0;
+			//ダメージ時に１ターン経過
+			turn_num++;
 			return true;
 		}
 		break;
@@ -147,6 +151,8 @@ bool GameBattle::OneBattle(int whoturn, int whotarget, int atk_num, bool atk_or_
 			}
 			//ダメージをリセット
 			last_damage = 0;
+			//ダメージ時に１ターン経過
+			turn_num++;
 			return true;
 		}
 		break;
@@ -180,6 +186,8 @@ bool GameBattle::OneBattle(int whoturn, int whotarget, int atk_num, bool atk_or_
 			}
 			//ダメージをリセット
 			last_damage = 0;
+			//ダメージ時に１ターン経過
+			turn_num++;
 			return true;
 		}
 		break;
