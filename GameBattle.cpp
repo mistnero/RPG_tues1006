@@ -1,8 +1,8 @@
 #include "GameBattle.h"
 
 GameBattle::GameBattle(const std::string& name, int pjID, int en)
-	:ene_n(en),pl(PlayerF::CreateP(name,pjID)),chara_state{ B_NORMAL_DATA,B_NORMAL_DATA,B_NORMAL_DATA,B_NORMAL_DATA },
-	last_damage(0),turn_num(0)
+	:ene_n(en), pl(PlayerF::CreateP(name, pjID)), chara_state{ B_NORMAL_DATA,B_NORMAL_DATA,B_NORMAL_DATA,B_NORMAL_DATA },
+	footfast{ 0,0,0,0 }, last_damage(0), turn_num(0)
 {
 	for (int i = 0; i < ENE_MAX; i++)
 	{
@@ -17,6 +17,7 @@ GameBattle::GameBattle(const std::string& name, int pjID, int en)
 			ene_id[i] = -1;
 			ene[i] = nullptr;
 			chara_state[i + 1] = B_NO_DATA;
+			footfast[i + 1] = -1;
 		}
 	}
 }
@@ -209,6 +210,119 @@ int GameBattle::TurnCount(bool reset)
 		turn_num = 0;
 	}
 	return turn_num;
+}
+
+//誰が足早い（１（プレイヤー）～４で返す）
+int GameBattle::NextWhoFast(int fastnum)
+{
+	//仮
+	int cfast[ENE_MAX + 1];
+	//トーナメント式
+	int tou_fast[2];
+	int tou_slow[2];
+
+	if (fastnum > ene_n)
+	{
+		return -1;
+	}
+
+	//順番に2人ペアで競う
+	//プレイヤーが最初の敵より速い
+	if (pl->LookSPD() > ene[0]->LookSPD())
+	{
+		tou_fast[0] = 1;
+		tou_slow[0] = 2;
+	}
+	//逆
+	else if (pl->LookSPD() < ene[0]->LookSPD())
+	{
+		tou_fast[0] = 2;
+		tou_slow[0] = 1;
+	}
+	//同じ
+	else
+	{
+		int per = GameRandom::GetI().GetR(1, 100);
+		if (per <= 50)
+		{
+			tou_fast[0] = 1;
+			tou_slow[0] = 2;
+		}
+		else
+		{
+			tou_fast[0] = 2;
+			tou_slow[0] = 1;
+		}
+	}
+	//次の敵がいない
+	if (ene_n < 2)
+	{
+		tou_fast[1] = -1;
+		tou_slow[1] = -1;
+	}
+	//いるがその次がいない
+	else if (ene_n < 3)
+	{
+		tou_fast[1] = 3;
+		tou_slow[1] = 3;
+	}
+	//いる
+	else
+	{
+		if (ene[1]->LookSPD() > ene[2]->LookSPD())
+		{
+			tou_fast[1] = 3;
+			tou_slow[1] = 4;
+		}
+		else if (ene[1]->LookSPD() < ene[2]->LookSPD())
+		{
+			tou_fast[1] = 4;
+			tou_slow[1] = 3;
+		}
+		else
+		{
+			int per = GameRandom::GetI().GetR(1, 100);
+			if (per <= 50)
+			{
+				tou_fast[1] = 3;
+				tou_slow[1] = 4;
+			}
+			else
+			{
+				tou_fast[1] = 4;
+				tou_slow[1] = 3;
+			}
+		}
+	}
+	//一番早い、一番遅いのを出して間を調べる
+	//指定された順見て出力するのはそのあと
+
+
+	////探す
+	//for (int chara = 0; chara < ENE_MAX + 1; chara++)
+	//{
+	//	int spd = pl->LookSPD();
+	//	if (chara % 2 == 1)
+	//	{
+	//		//こっちのが早い
+	//		if (spd<ene[chara - 1]->LookSPD())
+	//		{
+	//			//３のときだけ配列１に入るように(１～４)
+	//			tou_fast[chara % 3] = chara + 1;
+	//			tou_slow[chara % 3] = chara;
+	//		}
+	//		else
+	//		{
+	//			tou_fast[chara % 3] = chara;
+	//			tou_slow[chara % 3] = chara + 1;
+	//		}
+	//	}
+	//	
+	//}
+	////一番早い奴と一番遅い奴を出す
+
+
+	
 }
 
 //テスト

@@ -21,6 +21,8 @@ class GameBattle
 	int ene_id[ENE_MAX];
 	//プレイヤー→敵１→敵２→敵３の順で状態判定する変数
 	int chara_state[ENE_MAX + 1];
+	//足の速さ順
+	int footfast[ENE_MAX + 1];
 
 	int EnemyIDLimit(int pl_level);
 
@@ -38,6 +40,8 @@ class GameBattle
 		B_END_DATA=1,
 	}; 
 
+	
+
 public:
 	GameBattle(const std::string& name, int pjID, int en);
 	~GameBattle();
@@ -48,6 +52,9 @@ public:
 
 	//ターンを数える(trueで０にリセット)
 	int TurnCount(bool reset);
+
+	//誰が足早い（１（プレイヤー）～４で返す）
+	int NextWhoFast(int fastnum);
 };
 
 //1.敵のIDをプレイヤーのレベルを参照して範囲を絞る→こっちでレベルをIDにする関数を用意 d

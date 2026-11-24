@@ -11,8 +11,12 @@ void SGame::Update(GameManager* manager)
 	std::string name;
 	std::cout << "名前をつけてください" << std::endl;
 	std::cin >> name;
-	std::unique_ptr<Player> pl = PlayerF::CreateP(name, 1);
-	int id = GameRandom::GetI().GetR(1, 3);
+	//敵１～３ランダムに決める
+	int ene_num = GameRandom::GetI().GetR(1, ENE_MAX);
+	//バトルクラスのポインタ
+	std::unique_ptr<GameBattle> battle = std::make_unique<GameBattle>(name, 1, ene_num);
+	//ターンクラスにキャラクター数を渡す
+	GameTurn::GetI().SetTurnM(ene_num + 1);
 	std::unique_ptr<Enemy> ene = EnemyF::CreateE(id);
 	int bt = 0;
 	bool test_turn = true;
