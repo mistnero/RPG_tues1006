@@ -1,7 +1,8 @@
 #include "GameBattle.h"
 
 GameBattle::GameBattle(const std::string& name, int pjID, int en)
-	:ene_n(en),pl(PlayerF::CreateP(name,pjID)),chara_state{ 0,0,0,0 },last_damage(0)
+	:ene_n(en),pl(PlayerF::CreateP(name,pjID)),chara_state{ B_NORMAL_DATA,B_NORMAL_DATA,B_NORMAL_DATA,B_NORMAL_DATA },
+	last_damage(0),turn_num(0)
 {
 	for (int i = 0; i < ENE_MAX; i++)
 	{
@@ -15,7 +16,7 @@ GameBattle::GameBattle(const std::string& name, int pjID, int en)
 		{
 			ene_id[i] = -1;
 			ene[i] = nullptr;
-			chara_state[i + 1] = -1;
+			chara_state[i + 1] = B_NO_DATA;
 		}
 	}
 }
@@ -42,74 +43,148 @@ int GameBattle::EnemyIDLimit(int pl_level)
 	return 0;
 }
 
-bool GameBattle::OneBattle(int whoturn, int whotarget,bool atk_or_damageTF)
+bool GameBattle::OneBattle(int whoturn, int whotarget, int atk_num, bool atk_or_damageTF)
 {
 	switch (whoturn)
 	{
 		//プレイヤーのターン
 	case 1:
+		//非存在、自傷になるので防ぐ
+		if (whotarget == 1 || whotarget - 1 > ene_n)
+		{
+			last_damage = 0;
+			return false;
+		}
+
 		//攻撃処理
 		if (atk_or_damageTF)
 		{
-			last_damage = pl->Attack();
+			for (int da = 0; da < atk_num; da++)
+			{
+				//ダメージを足す
+				last_damage += pl->Attack();
+			}
+			return true;
 		}
 		//ダメージ処理
 		else
 		{
-			if (whotarget == 1 || whotarget - 1 > ene_n)
+			//-プレイヤー、-配列で２引く
+			//ダメージ
+			ene[whotarget - 2]->Damage(last_damage, pl->LookSPD());
+			//倒れたら状態を変更
+			if (ene[whotarget - 2]->LookHP() <= 0)
 			{
-				return true;
+				chara_state[whotarget - 1] = B_END_DATA;
 			}
-			else
-			{
-				ene[whotarget - 2]->Damage(last_damage, pl->LookSPD());
-				if (ene[whotarget - 2]->LookHP() <= 0)
-				{
-					chara_state[whotarget - 1] = 1;
-				}
-
-			}
+			//ダメージをリセット
+			last_damage = 0;
+			return true;
 		}
 		break;
 
 		//以降敵のターン
 	case 2:
+		//プレイヤー以外がターゲットにならないように
+		if (whotarget != 1)
+		{
+			last_damage = 0;
+			return false;
+		}
+
 		//攻撃処理
 		if (atk_or_damageTF)
 		{
-
+			for (int da = 0; da < atk_num; da++)
+			{
+				//ダメージを足す
+				last_damage += ene[whoturn - 2]->Attack();
+			}
+			return true;
 		}
 		//ダメージ処理
 		else
 		{
-
+			//ダメージ
+			pl->Damage(last_damage, ene[whoturn - 2]->LookSPD());
+			//倒れたら状態を変更
+			if (pl->LookHP() <= 0)
+			{
+				chara_state[whotarget - 1] = B_END_DATA;
+			}
+			//ダメージをリセット
+			last_damage = 0;
+			return true;
 		}
 		break;
 
 	case 3:
+		if (whotarget != 1)
+		{
+			last_damage = 0;
+			return false;
+		}
+
 		//攻撃処理
 		if (atk_or_damageTF)
 		{
-
+			for (int da = 0; da < atk_num; da++)
+			{
+				//ダメージを足す
+				last_damage += ene[whoturn - 2]->Attack();
+			}
+			return true;
 		}
 		//ダメージ処理
 		else
 		{
-
+			//ダメージ
+			pl->Damage(last_damage, ene[whoturn - 2]->LookSPD());
+			//倒れたら状態を変更
+			if (pl->LookHP() <= 0)
+			{
+				chara_state[whotarget - 1] = B_END_DATA;
+			}
+			//ダメージをリセット
+			last_damage = 0;
+			return true;
 		}
 		break;
 
 	case 4:
+		if (whotarget != 1)
+		{
+			last_damage = 0;
+			return false;
+		}
+
 		//攻撃処理
 		if (atk_or_damageTF)
 		{
-
+			for (int da = 0; da < atk_num; da++)
+			{
+				//ダメージを足す
+				last_damage += ene[whoturn - 2]->Attack();
+			}
+			return true;
 		}
 		//ダメージ処理
 		else
 		{
-
+			//ダメージ
+			pl->Damage(last_damage, ene[whoturn - 2]->LookSPD());
+			//倒れたら状態を変更
+			if (pl->LookHP() <= 0)
+			{
+				chara_state[whotarget - 1] = B_END_DATA;
+			}
+			//ダメージをリセット
+			last_damage = 0;
+			return true;
 		}
 		break;
 	}
+
+
+	return false;
 }

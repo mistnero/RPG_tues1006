@@ -27,14 +27,25 @@ class GameBattle
 	//最終的なダメージを記録
 	int last_damage;
 
+	//ターン数
+	int turn_num;
+
+	//状態
+	enum
+	{
+		B_NO_DATA=-1,
+		B_NORMAL_DATA=0,
+		B_END_DATA=1,
+	}; 
+
 public:
 	GameBattle(const std::string& name, int pjID, int en);
 	~GameBattle();
 	//戦闘開始
 	void StartBattle(const std::string& name, int jID, int eID);
 
-	//一体分の戦闘関数　１（プレイヤー）～３で指定
-	bool OneBattle(int whoturn,int whotarget,bool atk_or_damageTF);
+	//一体分の戦闘関数　１（プレイヤー）～４で指定、攻撃回数、攻撃モード、ダメージモード
+	bool OneBattle(int whoturn,int whotarget,int atk_num,bool atk_or_damageTF);
 
 };
 
