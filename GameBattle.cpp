@@ -20,6 +20,10 @@ GameBattle::GameBattle(const std::string& name, int pjID, int en)
 		}
 	}
 }
+GameBattle::~GameBattle()
+{
+
+}
 
 int GameBattle::EnemyIDLimit(int pl_level)
 {
@@ -195,6 +199,16 @@ bool GameBattle::OneBattle(int whoturn, int whotarget, int atk_num, bool atk_or_
 
 
 	return false;
+}
+
+//ターンを数える(trueで０にリセット)
+int GameBattle::TurnCount(bool reset)
+{
+	if (reset)
+	{
+		turn_num = 0;
+	}
+	return turn_num;
 }
 
 //テスト

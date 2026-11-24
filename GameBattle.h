@@ -41,12 +41,13 @@ class GameBattle
 public:
 	GameBattle(const std::string& name, int pjID, int en);
 	~GameBattle();
-	//戦闘開始
-	void StartBattle(const std::string& name, int jID, int eID);
+	
 
-	//一体分の戦闘関数　１（プレイヤー）～４で指定、攻撃回数、攻撃モード、ダメージモード
+	//一体分の戦闘関数　１（プレイヤー）～４で指定、攻撃回数、攻撃モードかダメージモードか
 	bool OneBattle(int whoturn,int whotarget,int atk_num,bool atk_or_damageTF);
 
+	//ターンを数える(trueで０にリセット)
+	int TurnCount(bool reset);
 };
 
 //1.敵のIDをプレイヤーのレベルを参照して範囲を絞る→こっちでレベルをIDにする関数を用意 d
