@@ -54,7 +54,7 @@ public:
 	int TurnCount(bool reset);
 
 	//誰が足早い（１（プレイヤー）～４で返す）
-	int NextWhoFast(int fastnum);
+	int GetRankWhoFast(int fastnum);
 };
 
 //1.敵のIDをプレイヤーのレベルを参照して範囲を絞る→こっちでレベルをIDにする関数を用意 d
