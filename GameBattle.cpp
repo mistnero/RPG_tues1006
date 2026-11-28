@@ -295,7 +295,8 @@ int GameBattle::GetRankWhoFast(int fastnum)
 		}
 	}
 	
-
+	//‰½‚ào‚È‚¯‚ê‚Î’Ê‰ßƒGƒ‰[‚Æ‚µ‚Ä‚O
+	return 0;
 	
 	
 }

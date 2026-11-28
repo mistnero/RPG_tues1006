@@ -22,9 +22,17 @@ void SGame::Update(GameManager* manager)
 	bool test_turn = true;
 	int php = pl->LookHP();
 	int nhp = ene->LookHP();
+	int spd_rank;
 
 	while (true)
 	{
+		//’N‚ª‘¬‚¢‚©‚Å‡”Ô‚ğŒˆ‚ß‚é
+		for (int c = 0; c < ene_num + 1; c++)
+		{
+			spd_rank = battle->GetRankWhoFast(c + 1);
+			//if
+		}
+
 		if(test_turn)
 		{
 			if (pl->LookSPD() > ene->LookSPD())
