@@ -98,3 +98,17 @@ void GameTurn::NextRound()
 		}
 	}
 }
+
+//ターン中のメンバー番号を返す
+int GameTurn::GetTurn()
+{
+	//ループ
+	for (int ma = 0; ma < member_num; ma++)
+	{
+		//ターンだったら
+		if (turn_state[ma] == TURN_TRUE)
+		{
+			return ma + 1;
+		}
+	}
+}

@@ -23,6 +23,7 @@ void SGame::Update(GameManager* manager)
 	int php = pl->LookHP();
 	int nhp = ene->LookHP();
 	int spd_rank;
+	int record_r = 1;
 
 	while (true)
 	{
@@ -30,7 +31,25 @@ void SGame::Update(GameManager* manager)
 		for (int c = 0; c < ene_num + 1; c++)
 		{
 			spd_rank = battle->GetRankWhoFast(c + 1);
-			//if
+			//c+1番目のキャラクターの速さ順が今探している順番に一致したら
+			if (record_r == spd_rank)
+			{
+				//倒されたりなどでターン設定できないときはターンにならない
+				if (GameTurn::GetI().judgeTurnNext(c + 1))
+				{
+					//そこをターンに設定
+					GameTurn::GetI().SetTurnTrue(c + 1);
+				}
+				//次の順番
+				record_r++;
+				//数字が最後の準まで行ったら
+				if (record_r > ene_num + 1)
+				{
+					//次のラウンド
+					GameTurn::GetI().NextRound();
+					record_r = 1;
+				}
+			}
 		}
 
 		if(test_turn)

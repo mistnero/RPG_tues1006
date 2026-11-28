@@ -42,5 +42,7 @@ public:
 	bool judgeTurnNext(int mn);
 	//ラウンドリセット
 	void NextRound();
+	//ターン中のメンバー番号を返す（１～max４）
+	int GetTurn();
 
 };
